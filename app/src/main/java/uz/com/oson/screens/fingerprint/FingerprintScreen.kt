@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.com.oson.R
-import uz.com.oson.presenter.FingerprintViewModelImpl
 
 
 class FingerprintScreen : Screen{

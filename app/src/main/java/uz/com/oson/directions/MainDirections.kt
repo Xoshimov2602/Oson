@@ -4,8 +4,10 @@ import uz.com.oson.screens.pincode.PinCodeScreen
 import uz.com.oson.utils.MainContract
 import uz.com.oson.navigation.AppNavigator
 import uz.com.oson.screens.code.CodeScreen
+import uz.com.oson.screens.fingerprint.FingerprintScreen
 import uz.com.oson.screens.language.LanguageScreen
 import uz.com.oson.screens.login.LoginScreen
+import uz.com.oson.screens.main.MainScreen
 import uz.com.oson.screens.register.RegisterScreen
 import javax.inject.Inject
 
@@ -21,11 +23,11 @@ class MainDirections @Inject constructor(
     }
 
     override suspend fun navigateToFingerprint() {
-
+        navigator.navigateTo(FingerprintScreen())
     }
 
     override suspend fun navigateToMain() {
-
+        navigator.navigateTo(MainScreen())
     }
 
     override suspend fun navigateToLanguage() {

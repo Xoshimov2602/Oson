@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,14 +42,13 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.com.oson.R
-import uz.com.oson.presenter.LoginViewModelImpl
 import uz.com.oson.utils.MainContract
 
 class LoginScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = getViewModel<LoginViewModelImpl>()
-        LoginScreenContent { viewModel.onEventDispatcher(MainContract.Intent.OpenCode) }
+        LoginScreenContent(eventDispatcher = viewModel::onEventDispatcher)
     }
 }
 
@@ -55,7 +56,7 @@ class LoginScreen : Screen {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreenContent(
-    eventDispatcher: (MainContract.Intent) -> Unit = {}
+    eventDispatcher: (LoginContract.Intent) -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -77,13 +78,13 @@ fun LoginScreenContent(
         )
         Column(
             modifier = Modifier
-                .weight(4f)
+                .weight(6f)
                 .padding(top = 60.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             Row(
                 modifier = Modifier
-                    .height(48.dp)
+                    .height(56.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .background(Color.White, shape = RoundedCornerShape(10.dp))
@@ -121,7 +122,7 @@ fun LoginScreenContent(
 
             Row(
                 modifier = Modifier
-                    .height(48.dp)
+                    .height(56.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .background(Color.White, shape = RoundedCornerShape(10.dp))
@@ -167,13 +168,14 @@ fun LoginScreenContent(
                         unfocusedIndicatorColor = Color.Transparent
                     )
                 )
+
             }
 
             Spacer(modifier = Modifier.height(30.dp))
 
             Row(
                 modifier = Modifier
-                    .height(48.dp)
+                    .height(56.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .background(Color.White, shape = RoundedCornerShape(10.dp))
@@ -278,15 +280,17 @@ fun LoginScreenContent(
                 text = "Sign Up",
                 color = Color.Blue,
                 modifier = Modifier.clickable {
-                    eventDispatcher(MainContract.Intent.OpenRegister)
+                    eventDispatcher(LoginContract.Intent.OnClickSignUp)
                 }
             )
         }
 
-        if (text.length == 9 && password.length == 8) {
+
             Button(
-                onClick = { eventDispatcher(MainContract.Intent.OpenCode) },
+                enabled = text.length == 9 && password.length == 8,
+                onClick = { eventDispatcher(LoginContract.Intent.OnClickNext(phone = text, password = password)) },
                 colors = ButtonDefaults.buttonColors(
+                    disabledContainerColor = Color.Unspecified,
                     containerColor = Color.Blue
                 ),
                 modifier = Modifier
@@ -301,25 +305,7 @@ fun LoginScreenContent(
                     textAlign = TextAlign.Center,
                 )
             }
-        } else {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Unspecified
-                ),
-                modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .padding(horizontal = 16.dp)
-                    .height(50.dp),
-            ) {
-                Text(
-                    text = "Next",
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                )
-            }
-        }
+
     }
 }
 

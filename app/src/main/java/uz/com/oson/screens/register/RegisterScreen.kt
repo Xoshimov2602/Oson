@@ -44,7 +44,7 @@ import uz.com.oson.utils.MainContract
 class RegisterScreen : Screen {
     @Composable
     override fun Content() {
-
+        RegisterScreenContent()
     }
 }
 
@@ -336,13 +336,13 @@ fun RegisterScreenContent(
                 text = "Sign In",
                 color = Color.Blue,
                 modifier = Modifier.clickable {
-                    eventDispatcher(MainContract.Intent.OpenRegister)
+                    eventDispatcher(MainContract.Intent.OpenLogin)
                 }
             )
         }
 
         Button(
-            onClick = { eventDispatcher(MainContract.Intent.OpenCode) },
+            onClick = { eventDispatcher(MainContract.Intent.OpenLogin) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue
             ),

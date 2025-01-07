@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.com.oson.R
-import uz.com.oson.presenter.LanguageViewmodelImpl
 import uz.com.oson.utils.MainContract
 
 class LanguageScreen : Screen {
