@@ -38,23 +38,21 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.com.oson.R
-import uz.com.oson.utils.MainContract
+import uz.com.oson.screens.main.MainContract
 
 class LanguageScreen : Screen {
     @Composable
     override fun Content() {
-        val viewmodel = getViewModel<LanguageViewmodelImpl>()
+        val viewmodel = getViewModel<LanguageViewModelImpl>()
         LanguageContent(
-            eventDispatcher = { viewmodel.onEventDispatcher(MainContract.Intent.OpenLogin) },
-            languageListener = { language -> viewmodel.saveLanguage(language) }
+            eventDispatcher =  viewmodel::onEventDispatcher
         )
     }
 }
 
 @Composable
 fun LanguageContent(
-    eventDispatcher: (MainContract.Intent) -> Unit = {},
-    languageListener: (String) -> Unit = {}
+    eventDispatcher: (LanguageContract.Intent) -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -263,8 +261,7 @@ fun LanguageContent(
         if (selectedLanguage.isNotEmpty()) {
             Button(
                 onClick = {
-                    eventDispatcher(MainContract.Intent.OpenLogin)
-                    languageListener(selectedLanguage)
+                    eventDispatcher(LanguageContract.Intent.OnClickNext(language = selectedLanguage))
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue

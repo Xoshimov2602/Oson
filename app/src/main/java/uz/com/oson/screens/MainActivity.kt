@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import uz.com.oson.screens.language.LanguageScreen
 import uz.com.oson.screens.login.LoginScreen
@@ -34,13 +35,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             OsonTheme {
-                Navigator(LanguageScreen()) { navigator : Navigator ->
-                    LaunchedEffect(key1 = navigator) {
-                        navigatorHandler.navigation.collect{
-                            it(navigator)
+                BottomSheetNavigator{
+                    Navigator(LanguageScreen()) { navigator : Navigator ->
+                        LaunchedEffect(key1 = navigator) {
+                            navigatorHandler.navigation.collect{
+                                it(navigator)
+                            }
                         }
+                        CurrentScreen()
                     }
-                    CurrentScreen()
                 }
             }
         }
@@ -48,9 +51,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun RoundedPlaceholder() {
+fun RoundedPlaceholder(number : String) {
     Text(
-        text = "",
+        text = number,
         modifier = Modifier
             .padding(horizontal = 4.dp)
             .height(60.dp)

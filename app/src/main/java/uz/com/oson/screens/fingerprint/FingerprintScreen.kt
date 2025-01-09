@@ -37,14 +37,14 @@ class FingerprintScreen : Screen{
     @Composable
     override fun Content() {
         val viewModel = getViewModel<FingerprintViewModelImpl>()
-        FingerprintComponent{viewModel.openMain()}
+        FingerprintComponent(onButtonClick = viewModel::onEventDispatcher)
     }
-
 }
 
 @Composable
-fun FingerprintComponent(onButtonClick : () -> Unit = {}) {
-
+fun FingerprintComponent(
+    onButtonClick : (FingerprintContract.Intent) -> Unit = {}
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -117,10 +117,11 @@ fun FingerprintComponent(onButtonClick : () -> Unit = {}) {
 
             Row() {
                 Button(
-                    onClick = {
-//                navigator.navigate(Screens.CODE)
-                        onButtonClick
-                    },
+//                    onClick = {
+////                navigator.navigate(Screens.CODE)
+//                        onButtonClick
+//                    },
+                    onClick = {onButtonClick(FingerprintContract.Intent.OnClickNext)},
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White
                     ),
@@ -144,7 +145,7 @@ fun FingerprintComponent(onButtonClick : () -> Unit = {}) {
                     )
                 }
                 Button(
-                    onClick = onButtonClick,
+                    onClick = {onButtonClick(FingerprintContract.Intent.OnClickNext)},
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Blue
                     ),

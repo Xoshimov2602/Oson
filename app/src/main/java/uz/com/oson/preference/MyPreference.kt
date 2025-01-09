@@ -10,4 +10,5 @@ class MyPreference @Inject constructor(@ApplicationContext context: Context) : S
     var isRegistered : Boolean by booleans()
     var chosenLanguage : String by strings()
     var tempToken : String by strings()
+    var code : String by strings()
 }

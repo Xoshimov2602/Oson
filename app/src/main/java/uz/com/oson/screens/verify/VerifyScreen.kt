@@ -1,5 +1,7 @@
-package uz.com.oson.screens.code
+package uz.com.oson.screens.verify
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +21,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,20 +43,24 @@ import uz.com.oson.R
 import uz.com.oson.screens.RoundedPlaceholder
 
 
-class CodeScreen : Screen {
+class VerifyScreen : Screen {
     @Composable
     override fun Content() {
-        val viewModel =getViewModel<CodeViewModelImpl>()
-        CodeScreenContent({ viewModel.openPinCode() })
+        val viewModel = getViewModel<VerifyViewModelImpl>()
+        CodeScreenContent(
+            onClickButton = viewModel::onEventDispatcher
+        )
     }
 }
+
+var codeList = mutableListOf<Int>()
 
 
 @Composable
 fun CodeScreenContent(
-    onClickButton : () -> Unit = {},
-    onBackClick : () -> Unit = {}
+    onClickButton: (VerifyContract.Intent) -> Unit = {},
 ) {
+    var code by remember { mutableStateOf("      ") }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -75,7 +85,7 @@ fun CodeScreenContent(
                         .padding(start = 8.dp)
                         .padding(3.dp)
                         .clickable {
-                            onBackClick
+                            onClickButton(VerifyContract.Intent.MoveBack)
                         },
                     contentScale = ContentScale.Inside
                 )
@@ -105,7 +115,8 @@ fun CodeScreenContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 repeat(6) {
-                    RoundedPlaceholder()
+                    var res = code[it]
+                    RoundedPlaceholder(if (code.length < it) res.toString() else "")
                 }
             }
 
@@ -126,6 +137,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(1)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -143,6 +160,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(2)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -161,6 +184,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(3)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -188,6 +217,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(4)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -205,6 +240,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(5)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -223,6 +264,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(6)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -250,6 +297,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(7)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -267,6 +320,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(8)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -285,6 +344,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(9)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -321,6 +386,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .clip(RoundedCornerShape(35.dp))
                         .background(Color.White)
+                        .clickable {
+                            if (code.length < 7) {
+                                codeList.add(0)
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp),
                     style = TextStyle(
                         fontSize = 32.sp,
@@ -340,6 +411,12 @@ fun CodeScreenContent(
                         .size(70.dp)
                         .padding(16.dp)
                         .clip(RoundedCornerShape(35.dp))
+                        .clickable {
+                            if (codeList.size > 0) {
+                                deleteNumber()
+                                code = codeList.joinToString(separator = "")
+                            }
+                        }
                         .padding(top = 15.dp)
                         .background(Color.Transparent),
                 )
@@ -351,7 +428,7 @@ fun CodeScreenContent(
         }
 
         Button(
-            onClick = onClickButton,
+            onClick = { onClickButton(VerifyContract.Intent.OpenPinCode) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue
             ),
@@ -370,6 +447,15 @@ fun CodeScreenContent(
             )
         }
     }
+}
+
+private fun addNumber(number: Int) {
+    codeList.add(number)
+}
+
+@SuppressLint("NewApi")
+private fun deleteNumber() {
+    codeList.removeLast()
 }
 
 @Preview

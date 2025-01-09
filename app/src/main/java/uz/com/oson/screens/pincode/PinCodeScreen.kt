@@ -32,21 +32,20 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import uz.com.oson.R
 import uz.com.oson.screens.RoundedPinPlaceholder
-import uz.com.oson.utils.MainContract
+import uz.com.oson.screens.main.MainContract
 
 
 class PinCodeScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = getViewModel<PinCodeViewModelImpl>()
-        PinCodeScreenContent { viewModel.openFingerprint() }
+        PinCodeScreenContent(eventDispatcher = viewModel::onEventDispatcher)
     }
 }
 
 @Composable
 fun PinCodeScreenContent(
-    onButtonClick: () -> Unit = {},
-    eventDispatcher: (MainContract.Intent) -> Unit = {}
+    eventDispatcher: (PinCodeContract.Intent) -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -332,7 +331,7 @@ fun PinCodeScreenContent(
         }
 
         Button(
-            onClick = {eventDispatcher(MainContract.Intent.OpenCode)},
+            onClick = {eventDispatcher(PinCodeContract.Intent.OnClickNext(""))},
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue
             ),

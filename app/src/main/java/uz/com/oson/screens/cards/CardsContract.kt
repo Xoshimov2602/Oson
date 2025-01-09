@@ -1,19 +1,21 @@
-package uz.com.oson.screens.language
+package uz.com.oson.screens.cards
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface LanguageContract {
+interface CardsContract {
     data class UIState (
-        val isLoading : Boolean = false
+        val isLoading : Boolean = false,
+        val openDialog : Boolean = false
     )
     interface Intent {
-        data class OnClickNext (val language :String) : Intent
+        object OpenCardDialog
+
     }
     interface ViewModel {
         val uiState : StateFlow<UIState>
         fun onEventDispatcher (intent : Intent)
     }
     interface Direction {
-        suspend fun moveToLogin()
+
     }
 }

@@ -38,7 +38,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import uz.com.oson.R
-import uz.com.oson.utils.MainContract
+import uz.com.oson.screens.login.LoginContract
+import uz.com.oson.screens.main.MainContract
 
 
 class RegisterScreen : Screen {
@@ -51,7 +52,7 @@ class RegisterScreen : Screen {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreenContent(
-    eventDispatcher: (MainContract.Intent) -> Unit = {}
+    eventDispatcher: (RegisterContract.Intent) -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -336,13 +337,13 @@ fun RegisterScreenContent(
                 text = "Sign In",
                 color = Color.Blue,
                 modifier = Modifier.clickable {
-                    eventDispatcher(MainContract.Intent.OpenLogin)
+                    eventDispatcher(RegisterContract.Intent.OpenLogin)
                 }
             )
         }
 
         Button(
-            onClick = { eventDispatcher(MainContract.Intent.OpenLogin) },
+            onClick = { eventDispatcher(RegisterContract.Intent.OpenVerify) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue
             ),

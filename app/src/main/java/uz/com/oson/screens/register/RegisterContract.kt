@@ -1,19 +1,21 @@
-package uz.com.oson.screens.language
+package uz.com.oson.screens.register
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface LanguageContract {
+interface RegisterContract {
     data class UIState (
-        val isLoading : Boolean = false
+        var isLoading : Boolean = false
     )
     interface Intent {
-        data class OnClickNext (val language :String) : Intent
+        object OpenVerify : Intent
+        object OpenLogin : Intent
     }
     interface ViewModel {
         val uiState : StateFlow<UIState>
         fun onEventDispatcher (intent : Intent)
     }
     interface Direction {
-        suspend fun moveToLogin()
+        suspend fun moveToVerify ()
+        suspend fun moveToLogin ()
     }
 }
