@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.com.oson.navigation.AppNavigator
-import uz.gita.lesson56.navigation.AppNavigatorDispatcher
-import uz.gita.lesson56.navigation.AppNavigatorHandler
+import uz.com.oson.navigation.AppNavigatorDispatcher
+import uz.com.oson.navigation.AppNavigatorHandler
 
 @Module
 @InstallIn(SingletonComponent::class)

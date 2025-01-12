@@ -1,8 +1,7 @@
-package uz.gita.lesson56.navigation
+package uz.com.oson.navigation
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.flow.MutableSharedFlow
-import uz.com.oson.navigation.AppNavigator
 import javax.inject.Inject
 import javax.inject.Singleton
 

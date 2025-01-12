@@ -1,4 +1,4 @@
-package uz.gita.lesson56.navigation
+package uz.com.oson.navigation
 
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator

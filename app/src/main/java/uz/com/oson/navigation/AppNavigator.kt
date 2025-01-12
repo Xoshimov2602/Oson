@@ -1,7 +1,5 @@
 package uz.com.oson.navigation
 
-import uz.gita.lesson56.navigation.AppScreen
-
 interface AppNavigator {
     suspend fun navigateTo(screen: AppScreen)
     suspend fun navigateToSingleTop(screen: AppScreen)

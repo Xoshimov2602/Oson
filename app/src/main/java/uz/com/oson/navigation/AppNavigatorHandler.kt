@@ -1,4 +1,4 @@
-package uz.gita.lesson56.navigation
+package uz.com.oson.navigation
 
 import kotlinx.coroutines.flow.Flow
 

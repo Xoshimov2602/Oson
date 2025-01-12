@@ -1,7 +1,6 @@
 package uz.com.oson.presentation.adapter
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,12 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -28,10 +25,17 @@ import uz.com.oson.R
 import uz.com.oson.utils.CardsEnum
 
 @Composable
-fun CardItem(name: String, card: CardsEnum, modifier: Modifier = Modifier) {
+fun CardItem(
+    name: String,
+    card: CardsEnum,
+    modifier: Modifier = Modifier,
+    expiredYear: String,
+    expiredMonths: String,
+    pan: String,
+    amount : String
+) {
     Column(
         modifier
-
     ) {
         val fontFamily = FontFamily(
             Font(R.font.gilroy_semibold),
@@ -60,9 +64,9 @@ fun CardItem(name: String, card: CardsEnum, modifier: Modifier = Modifier) {
                     .size(40.dp)
             )
         }
+        Spacer(modifier = Modifier.weight(1f))
         Row(
             modifier = Modifier
-                .padding(top = 6.dp)
                 .padding(start = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -71,7 +75,7 @@ fun CardItem(name: String, card: CardsEnum, modifier: Modifier = Modifier) {
                 contentDescription = ""
             )
             Text(
-                text = "0",
+                text = amount,
                 color = Color.White,
                 fontSize = 24.sp,
                 modifier = Modifier.padding(8.dp),
@@ -93,9 +97,9 @@ fun CardItem(name: String, card: CardsEnum, modifier: Modifier = Modifier) {
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 16.dp),
         ) {
-            Text(text = "**** 1971", modifier = Modifier, color = Color.White)
+            Text(text = "**** ${pan.takeLast(4)}", modifier = Modifier, color = Color.White)
             Spacer(modifier = Modifier.weight(1f))
-            Text(text = String.format("%02d/%02d", 8, 28), style =TextStyle (Color.White))
+            Text(text = "$expiredMonths/$expiredYear", style = TextStyle(Color.White))
         }
     }
 }
@@ -104,5 +108,5 @@ fun CardItem(name: String, card: CardsEnum, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun CardPreview() {
-    CardItem("main", CardsEnum.HUMO)
+    CardItem("main", CardsEnum.HUMO, expiredYear =  "", expiredMonths =  "", pan =  "", amount = "12000")
 }
